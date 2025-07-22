@@ -1,0 +1,29 @@
+POST http://localhost:7000/api/users/register HTTP/1.1
+content-type: application/json
+
+{
+      "email":"a4c23232@gmail.com",
+      "password":"123456789",
+      "firstName":"Tax",
+      "lastName":"khedr"
+     
+}
+
+###
+
+GET http://localhost:7000/api/users/allUsers HTTP/1.1
+content-type: application/json
+
+{
+
+}
+
+###
+
+POST http://localhost:7000/api/auth/login HTTP/1.1
+content-type: application/json
+
+{
+      "email":"abc@gmail.com",
+      "password":"123456789"
+}
