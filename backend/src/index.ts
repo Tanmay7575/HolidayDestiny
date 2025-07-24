@@ -37,7 +37,9 @@ app.use("/api/auth",loginRoute);
 app.use("/api/users",registerUser);
 app.use("/api/my-hotels",HotelRoute);
 
-
+app.get("*", (req: Request, res: Response) => {
+  res.sendFile(path.join(__dirname, "../../frontend/dist/index.html"));
+});
 
 app.listen(7000,()=>{
     console.log("server is runnig on :7000");
