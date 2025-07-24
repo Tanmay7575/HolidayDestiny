@@ -15,6 +15,7 @@ router.post("/register",[
 
 ],async(req:Request,res:Response)=>{
     const errors=validationResult(req);
+   
     if(!errors.isEmpty()){
         return res.status(400).json({message:errors.array()});
     }
@@ -28,7 +29,7 @@ router.post("/register",[
          }
          user=new User(req.body);
          await user.save();
-         const token =jwt.sign({userId:user.id},
+         const token =jwt.sign({userId:user._id},
             process.env.SCREATKEY as string,{
                 expiresIn:"1d"
             }
@@ -45,12 +46,6 @@ router.post("/register",[
      }
 });
 
-router.get("/allUsers",async(req:Request,res:Response)=>{
-         let Users=await User.find({});
-         if(!Users){
-            res.status(404).send({message:"Not a Single User"})
-         }
-         return res.status(200).send({Users});
-})
+
 
 export default router;

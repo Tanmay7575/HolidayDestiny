@@ -4,8 +4,17 @@ import cors from 'cors';
 import 'dotenv/config';
 import registerUser from './routes/users'
 import loginRoute from './routes/auth'
+import HotelRoute from './routes/my-hotels'
 import cookieParser from 'cookie-parser';
 import path from 'path';
+import{v2 as cloudinary} from 'cloudinary';
+
+cloudinary.config({
+    cloud_name:process.env.CLOUD_NAME,
+    api_key:process.env.CLOUD_API_KEY,
+    api_secret:process.env.CLOUD_API_SECRET,
+
+})
 
 import mongoose from 'mongoose';
 
@@ -22,8 +31,14 @@ app.use(cors({
 
 app.use(express.static(path.join(__dirname,"../../frontend/dist")))
 
+
+
 app.use("/api/auth",loginRoute);
 app.use("/api/users",registerUser);
+app.use("/api/my-hotels",HotelRoute);
+
+
+
 
 app.listen(7000,()=>{
     console.log("server is runnig on :7000");

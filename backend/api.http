@@ -27,3 +27,23 @@ content-type: application/json
       "email":"abc@gmail.com",
       "password":"123456789"
 }
+
+###
+POST http://localhost:7000/api/my-hotels HTTP/1.1
+content-type: application/json
+
+{
+        "userId": "687a2dfeb392ea151a41e403",
+        "name":"JW-Merriot Hotel",
+        "city":"Mumbai",
+        "country":"India",
+        "description":"fabulous ,dont vary about facilities",
+        "type":"AC/NON AC",
+        "adultCount":"3",
+        "childCount":"5",
+        "facilities":"with attach bath and swimming pool",
+        "pricePerNight":"24000",
+        "starRating":"4",
+        "imageUrls":["https://up.yimg.com/ib/th/id/OIP.oa6wkUpT9KjcmuimacYq3gHaE6?pid=Api&rs=1&c=1&qlt=95&w=151&h=100"],
+        
+}

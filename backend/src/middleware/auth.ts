@@ -1,6 +1,10 @@
 
 import {Request,Response, NextFunction } from "express";
-import jwt, { JwtPayload } from "jsonwebtoken";
+import jwt from "jsonwebtoken";
+
+interface JwtPayload {
+  userId: string;
+}
 
 declare global{
     namespace Express{
@@ -17,8 +21,8 @@ const verifyToken=(req:Request,res:Response,next:NextFunction)=>{
       }
 
       try {
-            const decoded=jwt.verify(token,process.env.SCREATKEY as string);
-            req.userId=(decoded as JwtPayload).userId;
+            const decoded=jwt.verify(token,process.env.SCREATKEY as string) as JwtPayload;
+             req.userId = decoded.userId;
             next();
       } catch (error) {
          return res.status(401).json({message:"unauthorized"})

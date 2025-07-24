@@ -28,7 +28,7 @@ router.post("/login",[
         if(!isMatch){
             return res.status(400).json({message:"Incorrect Credentials"});
         }
-         const token=jwt.sign({user:user.id},
+         const token=jwt.sign({userId:user._id},
             process.env.SCREATKEY as string,
             {
                 expiresIn:"1d"
@@ -39,6 +39,7 @@ router.post("/login",[
             secure:process.env.NODE_ENV==="production",
             maxAge:86400000,
          });
+      
          res.status(200).json({userId:user._id});
 
     } catch (error) {
