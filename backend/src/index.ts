@@ -28,15 +28,11 @@ app.use(cors({
     credentials: true,
 }));
 
-const frontendPath = path.join(__dirname, "./frontend/dist");
-
-app.use(express.static(frontendPath));
+app.use(express.static(path.join(__dirname, "../../frontend/dist")));
 
 app.use("/api/auth",loginRoute);
 app.use("/api/users",registerUser);
 app.use("/api/my-hotels",HotelRoute);
-
-
 
 app.listen(7000,()=>{
     console.log("server is runnig on :7000");
