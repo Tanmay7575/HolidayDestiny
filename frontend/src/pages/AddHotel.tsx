@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import * as apiClient from "../api-client"
 
 const AddHotel=()=>{
-    const {mutate,isLoading}=useMutation<void ,Error,FormData,unknown>({
+    const {mutate}=useMutation<void ,Error,FormData,unknown>({
         mutationFn:apiClient.addMyHotel,
         onSuccess:()=>{
         toast.success("Hotel Saved!");
@@ -17,7 +17,7 @@ const AddHotel=()=>{
           mutate(hotelFormData)
     }
     return (
-        <ManageHotelForm onSave={handleSave} isLoading={isLoading}/>
+        <ManageHotelForm onSave={handleSave} />
     )
 }
 

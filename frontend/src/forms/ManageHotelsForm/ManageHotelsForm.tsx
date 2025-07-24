@@ -22,10 +22,10 @@ export type HotelFormData = {
 
 type Props={
   onSave:(HotelFormData:FormData)=> void 
-  isLoading: boolean
+ 
 }
 
-const ManageHotelForm = ({onSave,isLoading}: Props) => {
+const ManageHotelForm = ({onSave}: Props) => {
   const formMethods = useForm<HotelFormData>();
   const { handleSubmit ,reset} = formMethods;
 
@@ -63,11 +63,11 @@ formDataJson.facilities.forEach((facility,index)=>{
           <ImageSection />
           <span className="flex justify-end m-4">
             <button
-            disabled={isLoading}
+           
             type="submit"
               className=" rounded bg-blue-600 text-white p-2 font-bold hover:bg-blue-500 text-xl disabled:bg-gray-500"
             >
-              {isLoading?"Saving...":"Save"}
+             Save
               
             </button>
           </span>
