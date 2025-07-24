@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-const UI_URL = "http://localhost:5173";
+const UI_URL = "https://holidaydestiny.onrender.com";
 import path from 'path';
 
 test.beforeEach(async ({ page }) => {
