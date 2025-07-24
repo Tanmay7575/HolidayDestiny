@@ -1,4 +1,4 @@
-import { HookCallbacks } from "async_hooks";
+
 import mongoose from "mongoose";
 
 export type HotelType={

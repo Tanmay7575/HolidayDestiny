@@ -13,7 +13,6 @@ cloudinary.config({
     cloud_name:process.env.CLOUD_NAME,
     api_key:process.env.CLOUD_API_KEY,
     api_secret:process.env.CLOUD_API_SECRET,
-
 })
 
 import mongoose from 'mongoose';
@@ -29,17 +28,15 @@ app.use(cors({
     credentials: true,
 }));
 
-app.use(express.static(path.join(__dirname,"../../frontend/dist")))
+const frontendPath = path.join(__dirname, "./frontend/dist");
 
-
+app.use(express.static(frontendPath));
 
 app.use("/api/auth",loginRoute);
 app.use("/api/users",registerUser);
 app.use("/api/my-hotels",HotelRoute);
 
-app.get("*", (req: Request, res: Response) => {
-  res.sendFile(path.join(__dirname, "../../frontend/dist/index.html"));
-});
+
 
 app.listen(7000,()=>{
     console.log("server is runnig on :7000");
