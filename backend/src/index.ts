@@ -34,8 +34,6 @@ app.use("/api/auth",loginRoute);
 app.use("/api/users",registerUser);
 app.use("/api/my-hotels",HotelRoute);
 
-
-
 app.listen(7000,()=>{
     console.log("server is runnig on :7000");
 })

@@ -16,11 +16,13 @@ export type HotelType={
     starRating:number;
     imageUrls:string[];
     lastUpdated:Date;
+    newProperty:string;
 }
 
 const hotelSchema=new mongoose.Schema<HotelType>({
           userId:{type:String,required:true},
           name:{type:String,required:true},
+          city:{type:String,required:true},
           country:{type:String,required:true},
           description:{type:String,required:true},
           type:{type:String,required:true},

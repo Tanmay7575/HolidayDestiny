@@ -7,6 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import SignIn from './pages/SignIn';
 import AddHotel from './pages/AddHotel';
 import { useAppContext } from './contexts/AppContext';
+import MyHotel from './pages/MyHotel';
 
 
 const App = () => {
@@ -29,6 +30,11 @@ const App = () => {
           <Route path="/add-hotel" element={
             <Layout>
               <AddHotel/>
+            </Layout>
+          }/>
+           <Route path="/my-hotels" element={
+            <Layout>
+              <MyHotel/>
             </Layout>
           }/>
           </>
