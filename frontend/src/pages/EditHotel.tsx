@@ -12,7 +12,6 @@ const EditHotel = () => {
 
   const {
     data: hotel,
-    isLoading,
     error,
   } = useQuery({
     queryKey: ["fetchMyHotelById", hotelId],
