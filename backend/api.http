@@ -30,7 +30,6 @@ content-type: application/json
 ###
 
 
-
 ###
 POST http://localhost:7000/api/my-hotels HTTP/1.1
 content-type: application/json
@@ -49,4 +48,29 @@ content-type: application/json
         "starRating":"4",
         "imageUrls":["https://up.yimg.com/ib/th/id/OIP.oa6wkUpT9KjcmuimacYq3gHaE6?pid=Api&rs=1&c=1&qlt=95&w=151&h=100"],
         
+}
+
+###
+
+GET http://localhost:7000/api/my-hotels/688377a65eeb0ca3bbe09acf HTTP/1.1
+Content-Type: application/json
+
+{
+     
+
+}
+
+###
+
+PUT http://localhost:7000/api/my-hotels/688377a65eeb0ca3bbe09acf HTTP/1.1
+Content-Type: application/json
+
+{
+       
+          "name": "JW M",
+          "city": "pune",
+          "country": "India",
+          "description": "unique larget majistique Hotel",
+          "type": "Bussiness"
+    
 }

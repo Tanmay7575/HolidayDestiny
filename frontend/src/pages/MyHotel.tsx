@@ -11,7 +11,7 @@ const MyHotel = () => {
 });
 if(isLoading) return <p>Loading....</p>
 if(error) return <p>Error...</p>
-console.log(hotelData);
+
     if(!hotelData){
         return <span>No Hotels Data</span>
     }
@@ -47,7 +47,7 @@ console.log(hotelData);
                     </div>
                     <div className="border border-slate-300 rounded-sm p-3 flex items-center">
                        <BiHotel className="mr-2 text-blue-500 w-5 h-5" />
-                        {hotel.adultCount} adults, {hotel.childCount}
+                        {hotel.adultCount} adult, {hotel.childCount} child
                     </div>
                     <div className="border border-slate-300 rounded-sm p-3 flex items-center">
                        <BiStar className="mr-2 text-blue-500 w-5 h-5" />

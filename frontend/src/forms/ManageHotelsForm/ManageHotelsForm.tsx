@@ -4,6 +4,10 @@ import TypeSection from "./TypeSection";
 import FacilitiesSection from "./FacilitiesSection";
 import GuestSection from "./GuestSection";
 import ImageSection from "./ImageSection";
+import type { HotelType } from "../../../../backend/src/shared/types";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+
 
 
 export type HotelFormData = {
@@ -18,19 +22,30 @@ export type HotelFormData = {
   pricePerNight: number;
   starRating: number;
   imageFiles: FileList;
+  imageUrls:string[];
 };
 
 type Props={
+  hotel?:HotelType;
   onSave:(HotelFormData:FormData)=> void 
- 
+  isPending:boolean,
 }
 
-const ManageHotelForm = ({onSave}: Props) => {
+const ManageHotelForm = ({onSave,isPending,hotel}: Props) => {
+  const navigate=useNavigate();
   const formMethods = useForm<HotelFormData>();
   const { handleSubmit ,reset} = formMethods;
+  
+  useEffect(()=>{
+    reset(hotel);
+  },[hotel,reset]);
 
   const onSubmit = handleSubmit((formDataJson: HotelFormData) => {
-    const formData = new FormData();
+      const formData = new FormData();
+    if(hotel){
+      formData.append("hotelId",hotel._id)
+    }
+
     formData.append("name", formDataJson.name);
     formData.append("city", formDataJson.city);
     formData.append("country", formDataJson.country);
@@ -43,17 +58,26 @@ const ManageHotelForm = ({onSave}: Props) => {
       
 formDataJson.facilities.forEach((facility,index)=>{
         formData.append(`facilities[${index}]`,facility)
-  })  
+  }) 
+  
+  //[image1.jpg,image2,jpg,image3,jpg]
+  //imageUrls=[image.jpg]
+  if(formDataJson.imageUrls){
+    formDataJson.imageUrls.forEach((url,index)=>{
+      formData.append(`imageUrls[${index}]`,url);
+    })
+  } 
        Array.from(formDataJson.imageFiles).forEach((imageFile)=>{
          formData.append(`imageFiles`,imageFile);
        });
 
        onSave(formData);
-       reset();
+       navigate("/my-hotels");
+       
   });
 
   return (
-    <div className="flex  justify-center rounded gap-10">
+    <div className="flex justify-center rounded gap-10">
       <FormProvider {...formMethods}>
         <form action="" onSubmit={onSubmit}>
           <DetailsSection />
@@ -67,7 +91,7 @@ formDataJson.facilities.forEach((facility,index)=>{
             type="submit"
               className=" rounded bg-blue-600 text-white p-2 font-bold hover:bg-blue-500 text-xl disabled:bg-gray-500"
             >
-             Save
+             {isPending ?"Loading...":"Save"}
               
             </button>
           </span>
