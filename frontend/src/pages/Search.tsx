@@ -20,7 +20,7 @@ const Search= () =>{
     const [selectedHotelTypes,setSelectedHotelTypes]=useState<string[]>([]);
     const [selectFacility,setSelectFacility]=useState<string[]>([]);
     const [selectedPrice, setSelectedPrice]=useState<number | undefined>();
-    const [sortOption , setSortOption]=useState<string>("");
+
     const searchParams={
         destination:search.destination,
         checkIn:search.checkIn.toISOString(),
@@ -32,7 +32,7 @@ const Search= () =>{
         types:selectedHotelTypes,
         facilities:selectFacility,
         maxPrice:selectedPrice?.toString(),
-        sortOption,
+   
     }
     const {data:hotelData}=useQuery({
         queryKey:["SearchHotels",searchParams],
@@ -68,30 +68,7 @@ const Search= () =>{
   
     return (
   <div className="grid grid-cols-1 lg:grid-cols-[200px_1fr] gap-6 px-20">
-    {/* Filter Sidebar */}
-    {/* <div className="rounded-lg border border-slate-300 p-4 h-fit w-full top-10 text-sm">
-      <div className="space-y-4">
-        <h3 className="text-base font-semibold border-b border-slate-300 pb-3">
-          Filter by:
-        </h3>
-        <StarRatingFilter 
-        selectedStars={selectedStars} 
-        onChange={handleStarsChange}
-        />
-        <HotelTypesFilter 
-        selectedHotelTypes={selectedHotelTypes}
-        onChange={handleHotelTypeChange}
-        />
-        <HotelFacility 
-        selectedFacilities={selectFacility}
-        onChange={handleHotelFacility}
-        />
-        <PriceFilter
-             selectedPrice={selectedPrice}
-             onChange={(value?:number)=> setSelectedPrice(value)}
-        />
-      </div>
-    </div> */}
+  
     <div className="relative w-full md:w-[250px] md:sticky md:top-10">
   {/* Toggle checkbox (hidden) */}
   <input type="checkbox" id="toggleFilters" className="peer hidden md:hidden" />

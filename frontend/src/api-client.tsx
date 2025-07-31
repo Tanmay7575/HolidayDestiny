@@ -2,7 +2,7 @@ import type { RegisterFormData } from "./pages/Register";
 import type { SignInFormData } from "./pages/SignIn";
 
 import type {HotelSearchResponse, HotelType} from "../../backend/src/shared/types"
-import { hotelFacilities } from "./config/hotel-options-config";
+
 const API_BASE_URL=import.meta.env.VITE_API_BASE_URL || '';
 
 export const register=async(formData:RegisterFormData)=>{
