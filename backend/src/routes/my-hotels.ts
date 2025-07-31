@@ -130,6 +130,25 @@ router.put(
   }
 );
 
+router.delete("/:hotelId",verifyToken,async(req:Request,res:Response)=>{
+         
+     try {
+      const id=req.params.hotelId.toString();
+       
+     const hotel=await Hotel.findByIdAndDelete({
+      _id:id,
+      userId:req.userId
+     })
+   
+
+     return res.status(200).json({message:"Hotel Deleted"});
+      
+     } catch (error) {
+       return  res.status(500).json({message:"Something went wrong"});
+     }
+})
+
+
 
 async function uploadImages(imageFiles: Express.Multer.File[]) {
   const uploadPromises = imageFiles.map(async (image) => {
@@ -141,6 +160,8 @@ async function uploadImages(imageFiles: Express.Multer.File[]) {
   const imageUrls = await Promise.all(uploadPromises);
   return imageUrls;
 }
+
+
 
 
 export default router;

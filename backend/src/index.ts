@@ -6,6 +6,7 @@ import registerUser from './routes/users'
 import loginRoute from './routes/auth'
 import HotelRoute from './routes/my-hotels'
 import cookieParser from 'cookie-parser';
+import SearchRoute from './routes/hotels'
 import path from 'path';
 import{v2 as cloudinary} from 'cloudinary';
 
@@ -33,6 +34,7 @@ app.use(express.static(path.join(__dirname, "../../frontend/dist")));
 app.use("/api/auth",loginRoute);
 app.use("/api/users",registerUser);
 app.use("/api/my-hotels",HotelRoute);
+app.use("/api/hotels",SearchRoute);
 
 app.listen(7000,()=>{
     console.log("server is runnig on :7000");
