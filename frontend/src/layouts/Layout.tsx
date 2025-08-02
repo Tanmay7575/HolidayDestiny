@@ -13,7 +13,7 @@ const Layout = ({children}:Props) => {
     <div className="flex flex-col min-h-screen ">
         <Header/>
         <div className="container mx auto px-20 flex justify-center">
-          <SearchBar/>
+         <SearchBar/>
         </div>
         <div className="container mx-auto py-10 flex-1">
           {children}

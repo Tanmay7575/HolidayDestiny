@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-let UI_URL="https://holidaydestiny.onrender.com"
+let UI_URL="http://localhost:7000"
 
 
 test('test to Register new user',async({page})=>{

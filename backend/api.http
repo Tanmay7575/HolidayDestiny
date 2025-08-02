@@ -82,3 +82,12 @@ Content-Type: application/json
 {
       
 }
+
+### 
+
+GET http://localhost:7000/api/hotels/688af9babfd841ba42a926ae HTTP/1.1
+Content-Type: application/json
+
+{
+      
+}
