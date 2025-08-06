@@ -33,7 +33,7 @@ export const SearchBar = () => {
     <form
       action=""
       onSubmit={handleSubmit}
-      className="-mt-8 bg-orange-400 rounded shadow-md grid grid-cols-2 lg:grid-cols-3 2xl:grid-cols-6 items-center gap-4 p-2"
+      className="-mt-5 bg-orange-400 rounded shadow-md grid grid-cols-2 lg:grid-cols-3 2xl:grid-cols-6 items-center gap-4 p-1"
     >
       <div className="flex flex-row items-center flex-1 bg-white p-2">
         <MdTravelExplore size={25} className="mr-2" />
@@ -42,10 +42,11 @@ export const SearchBar = () => {
           className="text-md w-full focus:outline-none"
           value={destination}
           onChange={(event) => setDestination(event.target.value)}
+          required
         />
       </div>
 
-      <div className="flex bg-white px-2 py-1 gap-2">
+      <div className="flex bg-white px-2 py-1 ">
         <label htmlFor="" className="items-center flex">
           Adults:
           <input
@@ -75,6 +76,7 @@ export const SearchBar = () => {
       </div>
       <div >
         <DatePicker selected={checkIn}
+        
          onChange={(date)=> 
           setCheckIn(date as Date)}
          selectsStart
@@ -86,8 +88,8 @@ export const SearchBar = () => {
          className="min-w-full bg-white p-2 focus:outline-none"
          wrapperClassName="min-w-full"
          />
-      </div>
-        <div >
+       </div>
+       <div>
         <DatePicker selected={checkOut}
          onChange={(date)=> 
           setCheckOut(date as Date)}
@@ -116,3 +118,5 @@ export const SearchBar = () => {
   );
 };
 export default SearchBar;
+
+

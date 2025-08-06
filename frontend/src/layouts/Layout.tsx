@@ -16,6 +16,7 @@ const Layout = ({children}:Props) => {
          <SearchBar/>
         </div>
         <div className="container mx-auto py-10 flex-1">
+          
           {children}
         </div>
         <Footer/>

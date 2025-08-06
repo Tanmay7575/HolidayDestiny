@@ -11,9 +11,6 @@ import PriceFilter from "../components/PriceFilter";
 
 const Search= () =>{
 
-
-
-
     const search = useSearchContext();
     const [page,setPage]=useState<number>(1);
     const [selectedStars,setSelectedStars]=useState<string[]>([]);
@@ -69,47 +66,39 @@ const Search= () =>{
     return (
   <div className="grid grid-cols-1 lg:grid-cols-[200px_1fr] gap-6 px-20">
   
-    <div className="relative w-full md:w-[250px] md:sticky md:top-10">
-  {/* Toggle checkbox (hidden) */}
-  <input type="checkbox" id="toggleFilters" className="peer hidden md:hidden" />
+  {/* Toggle Button & Filter Panel for md and smaller */}
+<div className="block lg:hidden w-full mb-4">
+  {/* Hidden checkbox to toggle */}
+  <input type="checkbox" id="toggleFilter" className="peer hidden" />
 
-  {/* Toggle button */}
+  {/* Button (Label) */}
   <label
-    htmlFor="toggleFilters"
-    className="md:hidden inline-block bg-slate-800 text-white px-4 py-2 rounded mb-4 cursor-pointer"
+    htmlFor="toggleFilter"
+    className="cursor-pointer px-4 py-2 bg-blue-600 text-white rounded-lg inline-block"
   >
-    Add Filters
+    Show Filters
   </label>
 
-  {/* Filter panel */}
-  <div
-    className="
-      peer-checked:block hidden 
-      md:block rounded-lg border border-slate-300 p-4 h-fit w-full text-sm
-    "
-  >
+  {/* Filter panel (only visible when checkbox is checked) */}
+  <div className="mt-4 hidden peer-checked:block rounded-lg border border-slate-300 p-4 text-sm">
     <div className="space-y-4">
-      <h3 className="text-base font-semibold border-b border-slate-300 pb-3">
-        Filter by:
-      </h3>
-
-      <StarRatingFilter
-        selectedStars={selectedStars}
-        onChange={handleStarsChange}
-      />
-      <HotelTypesFilter
-        selectedHotelTypes={selectedHotelTypes}
-        onChange={handleHotelTypeChange}
-      />
-      <HotelFacility
-        selectedFacilities={selectFacility}
-        onChange={handleHotelFacility}
-      />
-      <PriceFilter
-        selectedPrice={selectedPrice}
-        onChange={(value?: number) => setSelectedPrice(value)}
-      />
+      <h3 className="text-base font-semibold border-b border-slate-300 pb-3">Filter by:</h3>
+      <StarRatingFilter selectedStars={selectedStars} onChange={handleStarsChange} />
+      <HotelTypesFilter selectedHotelTypes={selectedHotelTypes} onChange={handleHotelTypeChange} />
+      <HotelFacility selectedFacilities={selectFacility} onChange={handleHotelFacility} />
+      <PriceFilter selectedPrice={selectedPrice} onChange={(value?: number) => setSelectedPrice(value)} />
     </div>
+  </div>
+</div>
+
+{/* Always visible on large screens and above */}
+<div className="hidden lg:block rounded-lg border border-slate-300 p-4 w-full text-sm">
+  <div className="space-y-4">
+    <h3 className="text-base font-semibold border-b border-slate-300 pb-3">Filter by:</h3>
+    <StarRatingFilter selectedStars={selectedStars} onChange={handleStarsChange} />
+    <HotelTypesFilter selectedHotelTypes={selectedHotelTypes} onChange={handleHotelTypeChange} />
+    <HotelFacility selectedFacilities={selectFacility} onChange={handleHotelFacility} />
+    <PriceFilter selectedPrice={selectedPrice} onChange={(value?: number) => setSelectedPrice(value)} />
   </div>
 </div>
 

@@ -2,7 +2,7 @@ import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form"
 import * as apiClient from "../api-client"
 import { toast } from "react-toastify";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAppContext } from "../contexts/AppContext";
 
 export type SignInFormData={
@@ -13,13 +13,15 @@ export type SignInFormData={
     const {refetchToken}=useAppContext();
       const navigate=useNavigate();
       const { register,handleSubmit,formState:{errors}} = useForm<SignInFormData>();
+
+      const location=useLocation();
     
       const mutation = useMutation({
         mutationFn: apiClient.SignIn,
         onSuccess:async () => {
            await refetchToken();
         toast.success("User SignIn Successfully");
-        navigate("/");
+        navigate(location.state?.from?.pathname || "/");
         },
         onError: (error) => {
          toast.error(error.message);

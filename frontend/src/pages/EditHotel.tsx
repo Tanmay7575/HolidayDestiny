@@ -1,3 +1,6 @@
+
+
+
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import * as apiClient from "../api-client";
@@ -5,10 +8,9 @@ import ManageHotelForm from "../forms/ManageHotelsForm/ManageHotelsForm";
 import { toast } from "react-toastify";
 
 const EditHotel = () => {
-
   const { hotelId } = useParams<{ hotelId: string }>();
 
-  if (!hotelId) return <div>Hotel ID not found</div>;
+  if (!hotelId) return <div className="text-center py-8">Hotel ID not found</div>;
 
   const {
     data: hotel,
@@ -31,14 +33,14 @@ const EditHotel = () => {
 
   const handleSave = (hotelFormData: FormData) => {
     mutate(hotelFormData);
-   
   };
 
-  if (isPending) return <div>Loading...</div>;
-  if (error) return <div>Error fetching hotel</div>;
+  if (isPending) return <div className="text-center py-10">Loading...</div>;
+  if (error) return <div className="text-center py-10 text-red-600">Error fetching hotel</div>;
 
   return (
-    <div className="px-10">
+    <div className="px-4 sm:px-8 md:px-10 lg:px-20 py-6 max-w-6xl mx-auto">
+      <h1 className="text-2xl md:text-3xl font-bold mb-6 text-center">Edit Hotel</h1>
       <ManageHotelForm hotel={hotel} onSave={handleSave} isPending={isPending} />
     </div>
   );

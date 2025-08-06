@@ -69,6 +69,11 @@ router.get("/", verifyToken, async (req: Request, res: Response) => {
   }
 });
 
+//hotel by city
+
+
+
+
 //edit
 router.get("/:id", verifyToken, async (req: Request, res: Response) => {
   const id = req.params.id.toString();
