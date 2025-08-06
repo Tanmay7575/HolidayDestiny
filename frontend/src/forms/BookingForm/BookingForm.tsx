@@ -41,8 +41,8 @@ const BookingForm = ({ currentUser, paymentIntent }: Props) => {
     onSuccess: () => {
       toast.success("Booking Saved..");
     },
-    onError: () => {
-      toast.error("Error Saving Booking");
+    onError: (error) => {
+      toast.error(error.message);
     },
   });
   const { handleSubmit, register } = useForm<BookingFormData>({
@@ -74,6 +74,7 @@ const BookingForm = ({ currentUser, paymentIntent }: Props) => {
       bookRoom({ ...formData, paymentIntentId: result.paymentIntent.id });
     }
   };
+
 
   return (
     <form
@@ -144,3 +145,4 @@ const BookingForm = ({ currentUser, paymentIntent }: Props) => {
 };
 
 export default BookingForm;
+

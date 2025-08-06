@@ -32,7 +32,7 @@ export type SignInFormData={
           mutation.mutate(data);
   })
   return (
-      <div className="flex justify-center bg-gray-100 rounded">
+      <div className="flex justify-center rounded">
         <form action="" className="flex flex-col" onSubmit={onSubmit}>
             <h2 className="text-3xl font-bold">Sign In</h2>  
              <label htmlFor="" className="text-gray-700 text-em font-bold ">

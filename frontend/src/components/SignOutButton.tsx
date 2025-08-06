@@ -25,7 +25,7 @@ const SignOutButton=()=>{
         navigate("/");
     }
     return (
-        <button onClick={handleClick}  className="flex items-center bg-white text-gray-600 px-3 font-bold hover:bg-gray-100 hover:text-green-500">
+        <button onClick={handleClick}  className="text-white px-4 py-1 font-bold bg-blue-600 rounded hover:bg-green-500">
             Sign Out
         </button>
     )

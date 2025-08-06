@@ -17,29 +17,41 @@ export const BookingSummary = ({
   numberofNights,
   hotel,
 }: Props) => {
-  return <div className="grid gap-4 rounded-lg border border-slate-300 p-5 h-fit">
-    <h2 className="text-xl font-bold">Your Booking Details</h2>
-    <div className="border-b py-2">
-        Location:
-        <div className="font-bold">{`${hotel.name},${hotel.city},${hotel.country}`}</div>
-    </div>
-    <div className="flex justify-between">
-        <div >Check-in
-            <div className="font-bold">{checkIn.toDateString()}</div>
+  return (
+    <div className="grid gap-4 rounded-xl border border-slate-300 p-4 shadow-md bg-white md:p-6 h-fit text-sm md:text-base">
+      <h2 className="text-xl font-semibold text-blue-700 border-b pb-2">
+        🧾 Your Booking Summary
+      </h2>
+
+      <div>
+        <p className="text-gray-600"> Location:</p>
+        <p className="font-bold">{`${hotel.name}, ${hotel.city}, ${hotel.country}`}</p>
+      </div>
+
+      <div className="grid grid-cols-2 gap-4 sm:flex sm:justify-between border-y py-2">
+        <div>
+          <p className="text-gray-600">Check-in</p>
+          <p className="font-bold">{checkIn.toDateString()}</p>
         </div>
-        <div >Check-out
-            <div className="font-bold">{checkOut.toDateString()}</div>
+        <div>
+          <p className="text-gray-600"> Check-out</p>
+          <p className="font-bold">{checkOut.toDateString()}</p>
         </div>
+      </div>
+
+      <div>
+        <p className="text-gray-600">Stay Duration:</p>
+        <p className="font-bold">{numberofNights} nights</p>
+      </div>
+
+      <div>
+        <p className="text-gray-600">Guests:</p>
+        <p className="font-bold">
+          {adultCount} adult(s){childCount > 0 ? ` & ${childCount} child` : ""}
+        </p>
+      </div>
     </div>
-     <div className="border-t border-b py-2">
-         Total length of stay:
-         <div className="font-bold">{numberofNights} nights</div>
-         </div>
-         <div>
-            Guest {" "}
-            <div className="font-bold">{adultCount} adults & {childCount} children</div>
-         </div>
-  </div>;
+  );
 };
 
 export default BookingSummary;

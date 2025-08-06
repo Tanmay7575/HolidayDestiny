@@ -28,7 +28,11 @@ const { mutate, isPending } = useMutation<void, Error, FormData, unknown>({
     }
   
     return (
-        <ManageHotelForm onSave={handleSave} isPending={isPending} />
+  <div>
+       <h1 className="text-2xl md:text-3xl font-bold mb-6 text-center">Add Hotel</h1>
+     <ManageHotelForm onSave={handleSave} isPending={isPending} />
+  </div>
+       
     )
 }
 

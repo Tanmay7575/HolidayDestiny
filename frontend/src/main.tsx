@@ -6,6 +6,10 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { AppContextProvider } from './contexts/AppContext.tsx'
 import { BrowserRouter as Router } from 'react-router-dom';
 import { SearchContextProvider } from './contexts/SearchContext.tsx'
+import { Elements } from '@stripe/react-stripe-js'
+import { loadStripe } from '@stripe/stripe-js'
+
+const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUB_KEY!);
 
 const queryClient=new QueryClient({
     defaultOptions:{
@@ -20,7 +24,10 @@ createRoot(document.getElementById('root')!).render(
         <AppContextProvider>
             <SearchContextProvider>
             <Router>
-                 <App />
+                 <Elements stripe={stripePromise}>
+          <App />
+        </Elements>
+             
             </Router>
 
             </SearchContextProvider>

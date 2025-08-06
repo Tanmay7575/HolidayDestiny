@@ -54,17 +54,19 @@ router.get("/search", async (req: Request, res: Response) => {
   }
 });
 
-router.get("/hotels",async(req:Request,res:Response)=>{
-        try {
-            const hotels=await Hotel.find();   
-            if(!hotels){
-              res.status(400).json({message:"Hotels not found"});
-            }
-            return res.json(hotels);
-        } catch (error) {
-           res.status(500).json({message:"Something went wrong"})
-        }
-})
+router.get("/hotels", async (req: Request, res: Response) => {
+  try {
+    const hotels = await Hotel.find();   
+    if (!hotels || hotels.length === 0) {
+      return res.status(404).json({ message: "Hotels not found" }); // ✅ return added
+    }
+    return res.json(hotels);
+  } catch (error) {
+    console.error("Error fetching hotels:", error);
+    return res.status(500).json({ message: "Something went wrong" });
+  }
+});
+
 
 router.get(
   "/:id",
@@ -89,83 +91,96 @@ router.post(
   "/:hotelId/bookings/payment-intent",
   verifyToken,
   async (req: Request, res: Response) => {
-  
-    const { numberOfNights } = req.body;
-    const hotelId = req.params.hotelId;
+    try {
+      const { numberOfNights } = req.body;
+      const  hotelId = req.params.hotelId;
 
-    const hotel = await Hotel.findById(hotelId);
-    if (!hotel) {
-      return res.status(400).json({ message: "Hotel not found" });
-    }
+      if (!numberOfNights || isNaN(numberOfNights)) {
+        return res.status(400).json({ message: "Invalid number of nights" });
+      }
 
-    const totalCost = hotel.pricePerNight * numberOfNights;
+      const hotel = await Hotel.findById(hotelId);
+      if (!hotel) {
+        return res.status(404).json({ message: "Hotel not found" });
+      }
 
-    const paymentIntent = await stripe.paymentIntents.create({
-      amount: totalCost *100,
-      currency: "inr",
-      metadata: {
-        hotelId,
-        userId: req.userId,
-      },
-    });
-    if (!paymentIntent.client_secret) {
+      const totalCost = hotel.pricePerNight * numberOfNights;
+
+      const paymentIntent = await stripe.paymentIntents.create({
+        amount: totalCost * 100, // Stripe needs amount in paise (for INR)
+        currency: "inr",
+        metadata: {
+          hotelId,
+          userId: req.userId,
+        },
+      });
+
+       if (!paymentIntent.client_secret) {
       return res.status(500).json({ message: "Error creating payment intent" });
     }
-    const response = {
-      paymentIntent: paymentIntent.id,
-      clientSecret: paymentIntent.client_secret.toString(),
-      totalCost,
-    };
-    res.send(response);
+      const response = {
+        paymentIntent: paymentIntent.id,
+        clientSecret: paymentIntent.client_secret!,
+        totalCost,
+      };
+     
+      return res.json(response);
+    } catch (error) {
+      console.error("Payment Intent Error:", error);
+      return res.status(500).json({ message: "Error creating payment intent" });
+    }
   }
 );
+
 
 router.post(
   "/:hotelId/bookings",
   verifyToken,
   async (req: Request, res: Response) => {
     try {
-      const paymentIntentId = req.body.paymentIntentId;
+      const { paymentIntentId } = req.body;
+      const hotelId = req.params.hotelId;
 
       const paymentIntent = await stripe.paymentIntents.retrieve(
         paymentIntentId as string
       );
 
       if (!paymentIntent) {
-        return res.status(400).json({ message: "Payment Intent Not Found" });
+        return res.status(400).json({ message: "Payment Intent not found" });
       }
 
       if (
-        paymentIntent.metadata.hotelId !== req.params.hotelId ||
+        paymentIntent.metadata.hotelId !== hotelId ||
         paymentIntent.metadata.userId !== req.userId
       ) {
-        return res.status(400).json({ message: "payment intent mismatch" });
+        return res.status(400).json({ message: "Payment intent mismatch" });
       }
 
       if (paymentIntent.status !== "succeeded") {
-        return res
-          .status(400)
-          .json({
-            message: `payment intent not successded.status:${paymentIntent.status}`,
-          });
+        return res.status(400).json({
+          message: `Payment intent not succeeded. Status: ${paymentIntent.status}`,
+        });
       }
-      
-      const newBooking:BookingType={
+
+      const newBooking: BookingType = {
         ...req.body,
-        userId:req.userId
-      }
+        userId: req.userId,
+      };
 
-      const hotel=await Hotel.findByIdAndUpdate({_id:req.params.hotelId},{
-          $pushL:{ bookings: newBooking}
-      });
+      const updatedHotel = await Hotel.findByIdAndUpdate(
+         { _id: req.params.hotelId },
+        {
+          $push: { bookings: newBooking },
+        }
+      );
 
-      if(!hotel){
-        return  res.status(400).json({message:"Hotel Not Found"})
+      if (!updatedHotel) {
+        return res.status(404).json({ message: "Hotel not found" });
       }
-      await hotel.save();
-      res.status(200).send();
+        await updatedHotel.save();
+      return res.status(200).json({ success: true, message: "Room booked successfully" });
     } catch (error) {
-      console.log(error);
+      console.error("Booking Error:", error);
       res.status(500).json({ message: "Something went wrong" });
     }
   }

@@ -61,7 +61,7 @@ export const SearchBar = () => {
           />
         </label>
          <label htmlFor="" className="items-center flex">
-          Children
+          Child
           <input
             className="w-full p-1 focus:outline-none font-bold "
             type="number"
