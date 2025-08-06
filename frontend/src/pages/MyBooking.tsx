@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import * as apiClient from "../api-client";
 import type { HotelType } from "../../../backend/src/shared/types";
 
-const MyBookings = () => {
+const MyBooking = () => {
   const { data: hotels } = useQuery<HotelType[]>({
     queryKey: ["fetchMyHotel"],
     queryFn: apiClient.fetchMyBookings,
@@ -62,4 +62,4 @@ const MyBookings = () => {
   );
 };
 
-export default MyBookings;
+export default MyBooking;

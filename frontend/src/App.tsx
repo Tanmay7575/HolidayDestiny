@@ -13,7 +13,7 @@ import Search from './pages/Search';
 import Detail from './pages/Detail';
 import Booking from './pages/Booking';
 import Home from './pages/Home';
-import MyBookings from './pages/myBookings';
+import MyBookings from './pages/MyBooking';
 
 
 const App = () => {
@@ -42,7 +42,7 @@ const App = () => {
          {isLoggedIn && <>
              <Route path="/my-Bookings" element={
             <Layout>
-           <MyBookings/>
+          <MyBookings/>
             </Layout>
           }/>
                <Route path="/hotels/:hotelId/Bookings" element={
