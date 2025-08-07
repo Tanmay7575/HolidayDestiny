@@ -18,39 +18,41 @@ export const BookingSummary = ({
   hotel,
 }: Props) => {
   return (
-    <div className="grid gap-4 rounded-xl border border-slate-300 p-4 shadow-md bg-white md:p-6 h-fit text-sm md:text-base">
-      <h2 className="text-xl font-semibold text-blue-700 border-b pb-2">
-        🧾 Your Booking Summary
-      </h2>
+   <div className="w-full md:max-w-md mx-auto grid gap-5 rounded-2xl border border-slate-200 p-5 shadow-lg bg-white text-sm md:text-base h-fit w-full">
+  <h2 className="text-lg font-semibold text-blue-700 border-b pb-3 flex items-center gap-2">
+    🧾 <span>Your Booking Summary</span>
+  </h2>
 
-      <div>
-        <p className="text-gray-600"> Location:</p>
-        <p className="font-bold">{`${hotel.name}, ${hotel.city}, ${hotel.country}`}</p>
-      </div>
+  <div>
+    <p className="text-gray-500 text-sm">Location:</p>
+    <p className="font-semibold text-slate-800">{`${hotel.name}, ${hotel.city}, ${hotel.country}`}</p>
+  </div>
 
-      <div className="grid grid-cols-2 gap-4 sm:flex sm:justify-between border-y py-2">
-        <div>
-          <p className="text-gray-600">Check-in</p>
-          <p className="font-bold">{checkIn.toDateString()}</p>
-        </div>
-        <div>
-          <p className="text-gray-600"> Check-out</p>
-          <p className="font-bold">{checkOut.toDateString()}</p>
-        </div>
-      </div>
-
-      <div>
-        <p className="text-gray-600">Stay Duration:</p>
-        <p className="font-bold">{numberofNights} nights</p>
-      </div>
-
-      <div>
-        <p className="text-gray-600">Guests:</p>
-        <p className="font-bold">
-          {adultCount} adult(s){childCount > 0 ? ` & ${childCount} child` : ""}
-        </p>
-      </div>
+  <div className="grid sm:grid-cols-2 gap-4 border-y py-3">
+    <div>
+      <p className="text-gray-500 text-sm">Check-in</p>
+      <p className="font-semibold text-slate-800">{checkIn.toDateString()}</p>
     </div>
+    <div>
+      <p className="text-gray-500 text-sm">Check-out</p>
+      <p className="font-semibold text-slate-800">{checkOut.toDateString()}</p>
+    </div>
+  </div>
+
+  <div>
+    <p className="text-gray-500 text-sm">Stay Duration:</p>
+    <p className="font-semibold text-slate-800">{numberofNights} night(s)</p>
+  </div>
+
+  <div>
+    <p className="text-gray-500 text-sm">Guests:</p>
+    <p className="font-semibold text-slate-800">
+      {adultCount} adult(s){childCount > 0 ? ` & ${childCount} child` : ""}
+    </p>
+  </div>
+</div>
+
+
   );
 };
 

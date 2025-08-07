@@ -19,7 +19,7 @@ import MyBookings from './pages/MyBooking';
 const App = () => {
   const {isLoggedIn}=useAppContext();
   return (
-  <>
+  <div className=" overflow-x-hidden">
    <ToastContainer position="top-right" autoClose={3000} />
      
       <Routes>
@@ -71,7 +71,7 @@ const App = () => {
 
       </Routes>
  
-    </>
+    </div>
   )
 }
 
