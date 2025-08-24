@@ -88,6 +88,21 @@ router.get("/:id", verifyToken, async (req: Request, res: Response) => {
     return res.status(500).json({ message: "Error Fetching hotels" });
   }
 });
+router.post("/:id",verifyToken,async(req:Request,res:Response)=>{
+  const id=req.params.id.toString();
+  try {
+    const hotel=await Hotel.findOne({
+      _id:id,
+      userId:req.userId,
+    })
+    if(!hotel){
+      return res.status(404).json({message:"Info not found"});
+    }
+    
+  } catch (error) {
+      return res.status(404).json({message:"Error"});
+  }
+})
 
 router.put(
   "/:hotelId",

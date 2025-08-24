@@ -13,8 +13,6 @@ type Props = {
   hotel: HotelType;
 };
 
-
-
 const HotelCard: React.FC<Props> = ({ hotel }) => {
   const [liked, setLiked] = useState(false);
 

@@ -18,7 +18,7 @@ export const BookingSummary = ({
   hotel,
 }: Props) => {
   return (
-   <div className="w-full md:max-w-md mx-auto grid gap-5 rounded-2xl border border-slate-200 p-5 shadow-lg bg-white text-sm md:text-base h-fit w-full">
+   <div className="w-full md:max-w-md mx-auto grid gap-5 rounded-2xl border border-slate-200 p-5 shadow-lg bg-white text-sm md:text-base h-fit w">
   <h2 className="text-lg font-semibold text-blue-700 border-b pb-3 flex items-center gap-2">
     🧾 <span>Your Booking Summary</span>
   </h2>

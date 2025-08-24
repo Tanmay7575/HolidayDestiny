@@ -2,19 +2,23 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useAppContext } from "../contexts/AppContext";
 import SignOutButton from "./SignOutButton";
+import ThemeToggle from "./ThemeToggle";
 
 const Header = () => {
-  const { isLoggedIn } = useAppContext();
+  const { isLoggedIn} = useAppContext();
+  
   const [menuOpen, setMenuOpen] = useState(false);
-
+  
   return (
-    <header className="bg-blue-800 px-4 sm:px-6 md:px-10 py-15">
+    <header
+    
+    className="bg-blue-800 px-4 sm:px-6 md:px-10 py-15 ">
       <div className="container mx-auto flex justify-between items-center">
         {/* Logo */}
         <span className="text-2xl md:text-3xl text-white font-bold tracking-tight">
           <Link to="/">HolidayDestiny.com</Link>
         </span>
-
+        <ThemeToggle/>
         {/* Desktop Nav */}
         <div className="hidden md:flex items-center gap-3">
           {isLoggedIn ? (

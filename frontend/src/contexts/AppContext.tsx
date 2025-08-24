@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Toast } from "../components/toast";
 import { useQuery } from "@tanstack/react-query";
 import * as apiClient from '../api-client'
@@ -12,14 +12,14 @@ type ToastMessage={
     type:"SUCCESS" | "ERROR";
 }
 
-
 export type AppContext={
        showToast:(toastMessage:ToastMessage)=> void
        isLoggedIn:boolean;
        refetchToken: () => void;
        stripePromise:Promise<Stripe | null>
+       theme:string;
+       toggleTheme:()=>void;
 }
-
 
 
 const AppContext=React.createContext<AppContext | undefined>(undefined);
@@ -30,13 +30,17 @@ const stripePromise=loadStripe(STRIPE_PUB_KEY);
 
 export const AppContextProvider=({children}:{children:React.ReactNode})=>{
     const [toast,setToast]=useState<ToastMessage | undefined>(undefined);
+   const [theme, setTheme] = useState("light"); 
+
     const { isError,refetch } = useQuery({
   queryKey: ["validateToken"],
   queryFn: apiClient.validateToken,
   retry: false,
-});
+}); 
 
-
+const toggleTheme = () => {
+  setTheme(prevTheme=> (prevTheme === 'light' ? "dark":"light"));
+};
           return(
            <AppContext.Provider value={{
             showToast:(toastMessage)=>{
@@ -44,7 +48,10 @@ export const AppContextProvider=({children}:{children:React.ReactNode})=>{
             },
             isLoggedIn:!isError,
              refetchToken: refetch,
-             stripePromise
+             stripePromise,
+           theme,
+           toggleTheme
+
            }}>
 
              {toast && (

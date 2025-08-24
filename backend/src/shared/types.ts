@@ -15,6 +15,7 @@ export type HotelType={
     lastUpdated:Date;
     newProperty:string;
     bookings: BookingType[];
+    reviews:ReviewType[];
 }
 
 export type HotelSearchResponse={
@@ -48,6 +49,13 @@ export type BookingType = {
     totalCost: number;
 }
 
+export type ReviewType={
+    _id:string;
+    userId:string;
+
+    review:string;
+    rating:number;
+}
 
 export type PaymentIntentResponse= {
     paymentIntendCard: string;

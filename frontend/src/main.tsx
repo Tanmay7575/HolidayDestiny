@@ -19,8 +19,10 @@ const queryClient=new QueryClient({
     },
 })
 
+
 createRoot(document.getElementById('root')!).render(
-     <QueryClientProvider client={queryClient}>
+  
+    <QueryClientProvider client={queryClient}>
         <AppContextProvider>
             <SearchContextProvider>
             <Router>
@@ -36,6 +38,8 @@ createRoot(document.getElementById('root')!).render(
         </AppContextProvider>
   
      </QueryClientProvider>
+  
+     
     
  
 )
