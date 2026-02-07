@@ -26,7 +26,8 @@ app.use(cookieParser())
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use(cors({
-    origin: process.env.FRONTEND_URL,
+    origin:[ process.env.FRONTEND_URL as string
+            ],
     credentials: true,
 }));
 
@@ -37,6 +38,10 @@ app.use("/api/users",registerUser);
 app.use("/api/my-hotels",HotelRoute);
 app.use("/api/hotels",SearchRoute);
 app.use("/api/my-bookings",bookingRouter);
+
+app.get("/health", (req, res) => {
+  res.status(200).send("OK");
+});
 
 app.listen(7000,()=>{
     console.log("server is runnig on :7000");
