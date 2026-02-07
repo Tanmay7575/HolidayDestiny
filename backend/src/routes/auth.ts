@@ -31,12 +31,13 @@ router.post("/login",[
          const token=jwt.sign({userId:user._id},
             process.env.SCREATKEY as string,
             {
-                expiresIn:"1d"
+                expiresIn: "1d"
             }
          );
          res.cookie("auth_token",token,{
-            httpOnly:true,
-            secure:process.env.NODE_ENV==="production",
+            httpOnly: true,
+            secure: true,
+            sameSite: "none",
             maxAge:86400000,
          });
       
