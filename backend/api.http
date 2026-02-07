@@ -1,0 +1,81 @@
+POST http://localhost:7000/api/users/register HTTP/1.1
+content-type: application/json
+
+{
+      "email":"a4c23232@gmail.com",
+      "password":"123456789",
+      "firstName":"Tax",
+      "lastName":"khedr"
+     
+}
+
+###
+GET http://localhost:7000/api/users/me HTTP/1.1
+content-type: application/json
+
+{ 
+     
+}
+###
+
+POST http://localhost:7000/api/auth/login HTTP/1.1
+content-type: application/json
+
+{
+      "email":"fake@gmail.com",
+      "password":"12345678"
+}
+
+###
+
+GET http://localhost:7000/api/my-hotels HTTP/1.1
+content-type: application/json
+
+{
+        "userId": "687b5bb9ca4aa3689febdf5b"
+}
+
+###
+
+
+###
+GET http://localhost:7000/api/my-hotels/688b0d8146d0e3e29e820d4d HTTP/1.1
+content-type: application/json
+
+
+###
+
+DELETE  http://localhost:7000/api/my-hotels/68844d69299398bca85fc72e HTTP/1.1
+Content-Type: application/json
+
+{
+            
+}
+
+###
+
+PUT http://localhost:7000/api/my-hotels/688377a65eeb0ca3bbe09acf HTTP/1.1
+Content-Type: application/json
+
+{
+       
+          "name": "JW M",
+          "city": "pune",
+          "country": "India",
+          "description": "unique larget majistique Hotel",
+          "type": "Bussiness"
+    
+}
+
+###
+
+GET http://localhost:7000/api/hotels/hotels HTTP/1.1
+
+### 
+
+GET http://localhost:7000/api/hotels/688b0d8146d0e3e29e820d4d HTTP/1.1
+Content-Type: application/json
+
+{
+      
+}
