@@ -31,8 +31,7 @@ const MyHotel = () => {
 
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Error fetching hotels</p>;
-  if (!hotelData || hotelData.length === 0) return <p>No Hotels Data</p>;
-
+  
   return (
     <div className="py-6 px-4 md:px-20">
       <div className="flex justify-between items-center mb-6">
@@ -46,7 +45,7 @@ const MyHotel = () => {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {hotelData.map((hotel) => (
+        { Array.isArray(hotelData) &&hotelData.length > 0 && hotelData.map((hotel) => (
           <div
             key={hotel._id}
             className="border border-slate-300 rounded-lg shadow-md overflow-hidden flex flex-col"
